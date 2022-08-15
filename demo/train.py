@@ -202,23 +202,11 @@ if __name__ == "__main__":
 
             model.count_pruned()
 
-            dummy_input = data_x[:32] * 0.0
-
-            onnx_name = f"pre_s{my_seed}_p{use_pruning}.onnx"
-            torch.onnx.export(model, dummy_input, \
-                    onnx_name, verbose=True)
             trainer.fit(model=model, \
                     train_dataloaders=train_dataloader,\
                     val_dataloaders=val_dataloader)
-
-            onnx_name = f"post_s{my_seed}_p{use_pruning}.onnx"
-
-            torch.onnx.export(model, dummy_input, \
-                    onnx_name, verbose=True)
 
             model.count_pruned()
 
 
 
-
-    import pdb; pdb.set_trace()
